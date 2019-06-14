@@ -32,6 +32,11 @@ class Post extends Model
         return $this->belongsTo('App\Photo');
     }
 
+    public function comment()
+    {
+        return $this->hasMany('App\Comment');
+    }
+
     public function photoPlaceholder()
     {
         return "http://placehold.it/700x200";
