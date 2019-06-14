@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class RegisterController extends Controller
 {
@@ -49,7 +51,8 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
         ]);
@@ -63,10 +66,54 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
+        $user = User::create([
+            'first_name' => $data['first_name'],
+            'last_name' => $data['last_name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+        
+        $user1 = User::find(2);
+        if(!$user1)
+        {
+            $this->createPermissions();
+            $this->assignAdmin();
+        }
+        else
+        {
+            $user->assignRole('patient');
+        }
+        $user->sendEmailVerificationNotification();
+
+        return $user;
+    }
+
+    public function createPermissions()
+    {
+        Role::create(['name'=>'admin']);
+        Role::create(['name'=>'supervisor']);
+        Role::create(['name'=>'doctor']);
+        Role::create(['name'=>'patient']);
+
+        Permission::create(['name'=>'create']);
+        Permission::create(['name'=>'read']);
+        Permission::create(['name'=>'update']);
+        Permission::create(['name'=>'delete']);
+
+        $role = Role::findById(1);
+        $role->givePermissionTo('create', 'read', 'update', 'delete');
+        $role1 = Role::findById(2);
+        $role1->givePermissionTo('read', 'update');
+        $role2 = Role::findById(3);
+        $role2->givePermissionTo('create', 'read', 'update');
+        $role3 = Role::findById(4);
+        $role3->givePermissionTo('read');
+
+    }
+
+    public function assignAdmin()
+    {
+        $user = User::find(1);
+        $user->assignRole('admin');
     }
 }
