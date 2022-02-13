@@ -10,8 +10,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
-class RegisterController extends Controller
-{
+class RegisterController extends Controller{
     /*
       |--------------------------------------------------------------------------
       | Register Controller
@@ -37,8 +36,7 @@ class RegisterController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
+    public function __construct(){
         $this->middleware('guest');
     }
 
@@ -48,8 +46,7 @@ class RegisterController extends Controller
      * @param array $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
-    {
+    protected function validator(array $data){
         return Validator::make($data, [
 //            'first_name' => ['required', 'string', 'max:255'],
 //            'last_name' => ['required', 'string', 'max:255'],
@@ -64,8 +61,7 @@ class RegisterController extends Controller
      * @param array $data
      * @return \App\User
      */
-    protected function create(array $data)
-    {
+    protected function create(array $data){
         $user = User::create([
 //            'first_name' => $data['first_name'],
 //            'last_name' => $data['last_name'],
@@ -85,8 +81,7 @@ class RegisterController extends Controller
         return $user;
     }
 
-    public function createPermissions()
-    {
+    public function createPermissions(){
         Role::create(['name' => 'admin']);
         Role::create(['name' => 'doctor']);
         Role::create(['name' => 'patient']);
@@ -104,8 +99,7 @@ class RegisterController extends Controller
         $patinet->givePermissionTo('read');
     }
 
-    public function assignAdmin()
-    {
+    public function assignAdmin(){
         $user = User::find(1);
         $user->assignRole('admin');
     }

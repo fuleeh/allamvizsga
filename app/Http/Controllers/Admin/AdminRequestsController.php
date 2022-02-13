@@ -1,12 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Requ;
 use App\RequestField;
 use App\User;
-use App\Requ;
-use Spatie\Permission\Models\Role;
+use Illuminate\Http\Request;
+use function back;
+use function redirect;
+use function view;
 
 class AdminRequestsController extends Controller
 {

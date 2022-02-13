@@ -6,13 +6,13 @@
 
     <h1>Create User</h1>
 
-    {!! Form::open(['method'=>'POST', 'action'=>'AdminUsersController@store', 'files'=>true]) !!}
+    {!! Form::open(['method'=>'POST', 'action'=>'Admin\AdminUsersController@store', 'files'=>true]) !!}
 
     <div class="form-group">
             {!! Form::label('first_name', 'First Name:') !!}
             {!! Form::text('first_name', null, ['class'=>'form-control']) !!}
     </div>
-    
+
     <div class="form-group">
             {!! Form::label('last_name', 'Last Name:') !!}
             {!! Form::text('last_name', null, ['class'=>'form-control']) !!}

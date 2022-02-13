@@ -1,13 +1,13 @@
 @component('mail::message')
-# Meghívás
+    # Meghívás
 
-Jó napot kívánunk, ezennel meghívtuk, hogy részt vegyen a diabétesz oldalunk orvosi személyzetében.
-Kérjük kattintson a "Tovább az oldalra" gombra és fogadja el a regisztrációját/töltse ki az adatait.
+    Jó napot kívánunk, ezennel meghívtuk, hogy részt vegyen a diabétesz oldalunk orvosi személyzetében.
+    Kérjük kattintson a "Tovább az oldalra" gombra és fogadja el a regisztrációját/töltse ki az adatait.
 
-@component('mail::button', ['url' => $url])
-Tovább az oldalra
-@endcomponent
+    @component('mail::button', ['url' => $url])
+        Tovább az oldalra
+    @endcomponent
 
-Köszönjük!<br>
-{{ config('app.name') }}
+    Köszönjük!<br>
+    {{ config('app.name') }}
 @endcomponent

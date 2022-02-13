@@ -15,7 +15,6 @@
 //     return view('/welcome');
 // });
 Route::get('/', 'PostsController@index');
-
 Auth::routes(['verify' => true]);
 Route::get('/logout', 'Auth\LoginController@logout');
 
@@ -38,36 +37,32 @@ Route::group(['middleware' => ['verified']], function()
 });
 
 Route::group(['middleware' => ['role:admin']], function () {
-    Route::get('/admin', function(){
-        return view('admin.index');
-    });
+    Route::get('/admin', 'Admin\AdminController@dashboard');
 
-    Route::get('/admin/invite', 'InvitesController@index')->name('admin.invite.index');
-    Route::post('/admin/invite', 'InvitesController@sendInvitation');
-
-    Route::get('/admin', 'AdminController@index');
-
-    Route::resource('admin/users', 'AdminUsersController', ['names'=>[
+    Route::resource('admin/users', 'Admin\AdminUsersController', ['names'=>[
         'index'=>'admin.users.index',
         'create'=>'admin.users.create',
         'store'=>'admin.users.store',
         'edit'=>'admin.users.edit'
     ]]);
 
-    Route::get('/admin/posts', 'AdminPostsController@index')->name('admin.posts.index');
-
-    Route::resource('admin/patientcategories', 'PatientCategoryController',['names'=>[
-        'index'=>'admin.patientcategories.index',
-        'create'=>'admin.patientcategories.create',
-        'store'=>'admin.patientcategories.store',
-        'edit'=>'admin.patientcategories.edit'
-    ]]);
-
-    Route::post('admin/request/fields', 'AdminRequestsController@createFields');
-    Route::get('admin/request/fields', 'AdminRequestsController@getFields')->name('admin.request.fields');
-    Route::get('admin/request/requests', 'AdminRequestsController@index')->name('admin.request.requests');
-    Route::post('admin/request/requests', 'AdminRequestsController@createRequest')->name('createReq');
+    Route::get('/admin/posts', 'Admin\AdminController@adminPostsList')->name('admin.posts.index');
+    Route::get('/admin/invite', 'Admin\AdminInvitesController@index')->name('admin.invite.index');
+    Route::post('/admin/invite', 'Admin\AdminInvitesController@sendInvitation');
 });
+
+//doki
+Route::resource('admin/patientcategories', 'PatientCategoryController',['names'=>[
+    'index'=>'admin.patientcategories.index',
+    'create'=>'admin.patientcategories.create',
+    'store'=>'admin.patientcategories.store',
+    'edit'=>'admin.patientcategories.edit'
+]]);
+
+Route::post('admin/request/fields', 'AdminRequestsController@createFields');
+Route::get('admin/request/fields', 'AdminRequestsController@getFields')->name('admin.request.fields');
+Route::get('admin/request/requests', 'AdminRequestsController@index')->name('admin.request.requests');
+Route::post('admin/request/requests', 'AdminRequestsController@createRequest')->name('createReq');
 
 Route::group(['middleware' => ['role:doctor']], function () {
     Route::get('/doctor', function()

@@ -1,10 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
-use Illuminate\Http\Request;
+namespace App\Http\Controllers\Admin;
+use App\Http\Controllers\Controller;
 use App\User;
-use Spatie\Permission\Models\Role;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Spatie\Permission\Models\Role;
+use function bcrypt;
+use function redirect;
+use function view;
 
 class AdminUsersController extends Controller
 {
@@ -16,7 +20,7 @@ class AdminUsersController extends Controller
     public function index()
     {
         $users = User::all();
-        
+
         return view('admin.users.index', compact('users'));
     }
 
@@ -47,7 +51,7 @@ class AdminUsersController extends Controller
             $input = $request->all();
             $input['password'] = bcrypt($request->password);
         }
-        
+
         /*if($file = $request->file('photo_id'))
         {
             $name = time() .$file->getClientOriginalName();
