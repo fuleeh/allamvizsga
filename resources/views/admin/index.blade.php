@@ -18,7 +18,7 @@
         data: {
             labels: ["Users", "Posts", "Categories"],
             datasets: [{
-                label: 'CMS Datas',
+                label: 'Site Datas',
                 data: [{{$usersCount}}, {{$postsCount}}, {{$categoriesCount}}],
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',

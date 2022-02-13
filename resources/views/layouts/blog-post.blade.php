@@ -84,7 +84,7 @@
                         </span>
                     </div>
                 </div>
-                @if($contentcategories)
+                {{-- @if($contentcategories)
                 <div class="well">
                     <h4>Kategóriák</h4>
                     @foreach($contentcategories as $contentcategory)
@@ -98,7 +98,7 @@
                     </div>
                 </div>
                     @endforeach
-                @endif
+                @endif --}}
 
                 <div class="well">
                     <h4>Side Widget Well</h4>

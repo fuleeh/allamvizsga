@@ -15,7 +15,7 @@
     <link href="{{asset('css/app.css')}}" rel="stylesheet">
 
     <link href="{{asset('css/libs.css')}}" rel="stylesheet">
-    
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -24,7 +24,7 @@
     <![endif]-->
 
 
-@yield('styles')
+    @yield('styles')
 </head>
 
 <body id="admin-page">
@@ -32,7 +32,7 @@
 <div id="wrapper">
 
     @include('includes.admin_navbar')
-    
+
     <div class="navbar-default sidebar" role="navigation">
         <div class="sidebar-nav navbar-collapse">
             <ul class="nav" id="side-menu">
@@ -58,8 +58,6 @@
             </div>
         </div>
     </div>
-</div>
-
 </div>
 
 <script src="{{asset('js/libs.js')}}"></script>

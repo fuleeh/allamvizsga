@@ -24,21 +24,23 @@ class AdminRequestsController extends Controller
     public function index()
     {
         $users = User::role('patient')->get();
+        // $users = User::all();
         $fields = RequestField::all();
-        return view('admin/request/requests',
-        [
-            'users' => $users,
-            'fields' => $fields
-        ]);
+
+        // return view('admin/request/requests',
+        // [
+        //     'users' => $users,
+        //     'fields' => $fields
+        // ]);
+        return view('admin.request.requests', compact('users', 'fields'));
     }
 
     public function createRequest(Request $request)
     {
-        foreach($request->user as $user)
-        {
+        foreach ($request->user as $user) {
             $req = new Requ();
             $req->user_id = $user;
-            
+
             $req->freq_start = $request->freq_start;
             $req->freq_end = $request->freq_end;
             $req->frequency = $request->frequency;
@@ -47,8 +49,8 @@ class AdminRequestsController extends Controller
             //+ email kuldes hogy toltse ki
 
         }
-        
-    
+
+
         return back();
     }
 }

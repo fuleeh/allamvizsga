@@ -32,7 +32,7 @@
               <td>{{$post->user->first_name}} {{$post->user->last_name}}</a></td>
               <td>{{$post->contentCategory ? $post->contentCategory->name : 'Uncategorized'}}</td>
               <td>{{$post->title}}</td>
-              <td>{{str_limit($post->body, 30)}}</td>
+              <td>{{\Illuminate\Support\Str::limit($post->body, 30)}}</td>
               <td>{{$post->created_at->diffForhumans()}}</td>
               <td>{{$post->updated_at->diffForhumans()}}</td>
 

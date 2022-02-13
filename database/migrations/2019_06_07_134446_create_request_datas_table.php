@@ -14,14 +14,14 @@ class CreateRequestDatasTable extends Migration
     public function up()
     {
         Schema::create('request_datas', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('user_id')->unsigned()->index();
-            $table->integer('request_id')->unsigned()->index();
+            $table->id();
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('request_id')->constrained();
             $table->text('data');
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('request_id')->references('id')->on('requests')->onDelete('cascade');
+            // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            // $table->foreign('request_id')->references('id')->on('requests')->onDelete('cascade');
         });
     }
 

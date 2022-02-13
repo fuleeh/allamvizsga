@@ -14,9 +14,9 @@ class CreateUserDatasTable extends Migration
     public function up()
     {
         Schema::create('user_datas', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('user_id')->unsigned()->index();
-            $table->integer('patient_category_id')->unsigned()->index();
+            $table->id();
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('patient_category_id')->constrained();
             $table->string('first_name', 50);
             $table->string('last_name', 50);
             $table->string('address', 100);
@@ -33,11 +33,11 @@ class CreateUserDatasTable extends Migration
 
         });
 
-        Schema::table('user_datas', function($table)
-        {
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('patient_category_id')->references('id')->on('patient_categories')->onDelete('cascade');
-        });
+        // Schema::table('user_datas', function($table)
+        // {
+        //     $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+        //     $table->foreign('patient_category_id')->references('id')->on('patient_categories')->onDelete('cascade');
+        // });
     }
 
     /**

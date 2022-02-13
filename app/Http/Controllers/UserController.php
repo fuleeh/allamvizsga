@@ -27,6 +27,7 @@ class UserController extends Controller
                 $user->save();
 
                 $userData = new UserData();
+                // dd($userData);
                 $userData->user_id = $user->id;
                 $userData->first_name = $request->first_name;
                 $userData->last_name = $request->last_name;

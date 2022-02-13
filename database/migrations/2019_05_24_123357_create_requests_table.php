@@ -14,8 +14,8 @@ class CreateRequestsTable extends Migration
     public function up()
     {
         Schema::create('requests', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('user_id')->unsigned()->index();
+            $table->id();
+            $table->foreignId('user_id')->constrained();
             $table->date('freq_start');
             $table->date('freq_end');
             $table->integer('frequency');
@@ -23,7 +23,7 @@ class CreateRequestsTable extends Migration
             $table->integer('status')->default(0);
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

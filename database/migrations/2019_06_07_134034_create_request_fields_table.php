@@ -14,7 +14,7 @@ class CreateRequestFieldsTable extends Migration
     public function up()
     {
         Schema::create('request_fields', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('name');
             $table->string('type');
             $table->timestamps();

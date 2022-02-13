@@ -28,8 +28,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $post =Post::all();
+        $posts = Post::all();
         $contentcategories = ContentCategory::all();
-        return view('layouts.blog-home', compact('post', 'contentcategories'));
+        return view('layouts.blog-home', compact('posts', 'contentcategories'));
     }
 }

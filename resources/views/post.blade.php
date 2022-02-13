@@ -3,35 +3,26 @@
 
 
 @section('content')
+    {{-- {{ dd($post) }} --}}
+    @foreach($posts as $post)
+        <h1>{{$post->title}}</h1>
 
-    <h1>{{$post->title}}</h1>
+        <p class="lead">
+            by {{$post->user->first_name}}
+        </p>
 
-    <p class="lead">
-        by <a href="#">{{$post->user->name}}</a>
-    </p>
+        <img class="img-responsive" src="{{$post->photo ? $post->photo->file : null}}" alt="">
 
-    <hr>
-    <p><span class="glyphicon glyphicon-time"></span> Posted {{$post->created_at->diffForHumans()}}</p>
+        <p>{!!$post->body!!}</p>
 
-    <hr>
+        <p><span class="glyphicon glyphicon-time"></span> Posted {{$post->created_at->diffForHumans()}}</p>
 
-    <img class="img-responsive" src="{{$post->photo ? $post->photo->file : null}}" alt="">
-
-    <hr>
-
-    <p>{!!$post->body!!}</p>
-
-    <hr>
-
-
-
-
+        <hr>
+    @endforeach
 @stop
 
 
 @section('scripts')
-
-
 
 @stop
 

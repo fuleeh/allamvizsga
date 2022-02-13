@@ -19,8 +19,10 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $posts = Post::paginate(2);
-        return view('doctor.posts.index', compact('posts'));
+        $posts = Post::all();
+        // dd($post);
+        // return view('doctor.posts.index', compact('posts'));
+        return view('home', compact('posts'));
     }
 
     /**
@@ -32,7 +34,9 @@ class PostsController extends Controller
     {
         $contentcategories = ContentCategory::pluck('name', 'id')->all();
 
-        return view('doctor.posts.create', compact('contentcategories'));
+        // return view('doctor.posts.create', compact('contentcategories'));
+        // return view('home', compact('contentcategories'));
+        return view('layouts.blog-home', compact('post', 'contentcategories'));
     }
 
     /**

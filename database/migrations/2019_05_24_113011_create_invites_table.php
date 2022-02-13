@@ -14,13 +14,13 @@ class CreateInvitesTable extends Migration
     public function up()
     {
         Schema::create('invites', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('email')->unique();
-            $table->integer('role_id')->unsigned()->index();
+            $table->foreignId('role_id')->constrained();
             $table->string('token');
             $table->timestamps();
 
-            $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
+            // $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
         });
     }
 

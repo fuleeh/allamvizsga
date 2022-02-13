@@ -11,9 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('/welcome');
+// });
+Route::get('/', 'PostsController@index');
 
 Auth::routes(['verify' => true]);
 Route::get('/logout', 'Auth\LoginController@logout');
@@ -23,15 +24,20 @@ Route::get('/post/{id}', ['as'=>'home.post', 'uses'=>'PostsController@post']);
 
 Route::post('medical/register', 'UserController@registerMedical');
 Route::get('medical/{token}/register', 'UserController@registerIndex')->name('medicalRegister');
-Route::get('patient/datas', 'UserController@userData')->name('userData');;
+Route::get('patient/datas', 'UserController@userData')->name('userData');
+
+Route::get('/post', 'PostsController@index')->name('post');
+
+Route::get('/home', 'PostsController@index')->name('home');
+
+Route::get('publications', 'PostsController@index')->name('publications');
 
 Route::group(['middleware' => ['verified']], function()
 {
 
-    Route::get('/home', 'HomeController@index')->name('home');
+});
 
-    Route::get('/post', 'PostsController@index')->name('post');
-
+Route::group(['middleware' => ['role:admin']], function () {
     Route::get('/admin', function(){
         return view('admin.index');
     });
@@ -61,10 +67,10 @@ Route::group(['middleware' => ['verified']], function()
     Route::get('admin/request/fields', 'AdminRequestsController@getFields')->name('admin.request.fields');
     Route::get('admin/request/requests', 'AdminRequestsController@index')->name('admin.request.requests');
     Route::post('admin/request/requests', 'AdminRequestsController@createRequest')->name('createReq');
-
 });
 
-Route::get('/doctor', function()
+Route::group(['middleware' => ['role:doctor']], function () {
+    Route::get('/doctor', function()
 {
     return view('doctor.index');
 });
@@ -82,6 +88,8 @@ Route::resource('doctor/contentcategories', 'ContentCategoryController',['names'
     'store'=>'doctor.contentcategories.store',
     'edit'=>'doctor.contentcategories.edit'
 ]]);
+});
+
 
 Route::get('/clear-cache', function() {
     Artisan::call('cache:clear');

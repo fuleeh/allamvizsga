@@ -10,7 +10,7 @@
         <th>Azonosító</th>
         <th>Író</th> 
         <th>Email</th> 
-        <th>Törs</th>
+        <th>Törzs</th>
         <th></th>
       </tr>
     </thead>

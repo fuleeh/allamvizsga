@@ -28,7 +28,7 @@
             
                 <div class="form-group">
                     {!! Form::label('first_name', 'First Name:') !!}
-                    {!! Form::text('f_nfirst_nameame', null, ['class'=>'form-control']) !!}
+                    {!! Form::text('first_name', null, ['class'=>'form-control']) !!}
                 </div>
 
                 <div class="form-group">
