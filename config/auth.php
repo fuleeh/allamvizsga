@@ -45,6 +45,36 @@ return [
             'driver' => 'token',
             'provider' => 'users',
         ],
+
+        'admin' => [
+            'driver' => 'token',
+            'provider' => 'admins'
+        ],
+
+        'admin-api' => [
+            'driver' => 'session',
+            'provider' => 'admins'
+        ],
+
+        'supervisor' => [
+            'driver' => 'token',
+            'provider' => 'supervisors'
+        ],
+
+        'supervisor-api' => [
+            'driver' => 'session',
+            'provider' => 'supervisors'
+        ],
+
+        'doctor' => [
+            'driver' => 'token',
+            'provider' => 'doctors'
+        ],
+
+        'doctor-api' => [
+            'driver' => 'session',
+            'provider' => 'doctors'
+        ],
     ],
 
     /*
@@ -65,10 +95,26 @@ return [
     */
 
     'providers' => [
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Admin::class,
+        ],
+
+        'supervisors' => [
+            'driver' => 'eloquent',
+            'model' => App\Supervisor::class,
+        ],
+
+        'doctors' => [
+            'driver' => 'eloquent',
+            'model' => App\Doctor::class,
+        ],
+
         'users' => [
             'driver' => 'eloquent',
             'model' => App\User::class,
         ],
+
 
         // 'users' => [
         //     'driver' => 'database',
@@ -92,6 +138,24 @@ return [
     */
 
     'passwords' => [
+        'admins' => [
+            'provider' => 'users',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+
+        'supervisors' => [
+            'provider' => 'users',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+
+        'doctors' => [
+            'provider' => 'users',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+
         'users' => [
             'provider' => 'users',
             'table' => 'password_resets',
