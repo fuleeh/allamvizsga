@@ -4,18 +4,18 @@
 
 @section('content')
     {{-- {{ dd($post) }} --}}
-    @foreach($posts as $post)
-        <h1>{{$post->title}}</h1>
+    @foreach($publications as $pub)
+        <h1>{{$pub->title}}</h1>
 
         <p class="lead">
-            by {{$post->user->first_name}}
+            by {{$pub->user->first_name}}
         </p>
 
-        <img class="img-responsive" src="{{$post->photo ? $post->photo->file : null}}" alt="">
+        <img class="img-responsive" src="{{$pub->photo ? $pub->photo->file : null}}" alt="">
 
-        <p>{!!$post->body!!}</p>
+        <p>{!!$pub->body!!}</p>
 
-        <p><span class="glyphicon glyphicon-time"></span> Posted {{$post->created_at->diffForHumans()}}</p>
+        <p><span class="glyphicon glyphicon-time"></span> Posted {{$pub->created_at->diffForHumans()}}</p>
 
         <hr>
     @endforeach

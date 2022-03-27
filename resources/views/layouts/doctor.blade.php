@@ -15,7 +15,7 @@
     <link href="{{asset('css/app.css')}}" rel="stylesheet">
 
     <link href="{{asset('css/libs.css')}}" rel="stylesheet">
-    
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -24,28 +24,29 @@
     <![endif]-->
 
 
-@yield('styles')
+    @yield('styles')
 </head>
 
-<body id="admin-page">
+<body id="doctor-page">
 
 <div id="wrapper">
-
+    @role('doctor')
     @include('includes.doctor_navbar')
-    
-    <div class="navbar-default sidebar" role="navigation">
-        <div class="sidebar-nav navbar-collapse">
-            <ul class="nav" id="side-menu">
-                <li>
-                    <a href="/profile"><i class="fa fa-dashboard fa-fw"></i>Profil</a>
-                </li>
+    @include('sweetalert::alert')
 
-            </ul>
+    {{--    <div class="navbar-default sidebar" role="navigation">--}}
+    {{--        <div class="sidebar-nav navbar-collapse">--}}
+    {{--            <ul class="nav" id="side-menu">--}}
+    {{--                <li>--}}
+    {{--                    <a href="/profile"><i class="fa fa-dashboard fa-fw"></i>Profil</a>--}}
+    {{--                </li>--}}
 
-        </div>
+    {{--            </ul>--}}
 
-    </div>
+    {{--        </div>--}}
 
+    {{--    </div>--}}
+    @endrole
 </div>
 
 <div id="page-wrapper">
@@ -60,7 +61,6 @@
     </div>
 </div>
 
-</div>
 
 <script src="{{asset('js/libs.js')}}"></script>
 

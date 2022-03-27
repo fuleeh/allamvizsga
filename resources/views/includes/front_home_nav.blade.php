@@ -26,8 +26,8 @@
                         <a href="/register">Register</a>
                     </li>
 
-                @else 
-                        
+                @else
+
                     <li>
                         <a href="/logout">Logout</a>
                     </li>

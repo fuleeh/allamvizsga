@@ -33,18 +33,18 @@
 
     @include('includes.admin_navbar')
 
-    <div class="navbar-default sidebar" role="navigation">
-        <div class="sidebar-nav navbar-collapse">
-            <ul class="nav" id="side-menu">
-                <li>
-                    <a href="/profile"><i class="fa fa-dashboard fa-fw"></i>Profil</a>
-                </li>
+{{--    <div class="navbar-default sidebar" role="navigation">--}}
+{{--        <div class="sidebar-nav navbar-collapse">--}}
+{{--            <ul class="nav" id="side-menu">--}}
+{{--                <li>--}}
+{{--                    <a href="/profile"><i class="fa fa-dashboard fa-fw"></i>Profil</a>--}}
+{{--                </li>--}}
 
-            </ul>
+{{--            </ul>--}}
 
-        </div>
+{{--        </div>--}}
 
-    </div>
+{{--    </div>--}}
 
 </div>
 

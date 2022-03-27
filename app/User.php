@@ -18,7 +18,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'first_name', 'last_name', 'email', 'password',
+        'email', 'password',
     ];
 
     /**
@@ -39,9 +39,9 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
-    public function posts()
+    public function publications()
     {
-        return $this->hasMany('App\Post');
+        return $this->hasMany('App\Publication');
     }
 
 }

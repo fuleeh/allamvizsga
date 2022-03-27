@@ -7,6 +7,7 @@ use App\Invites;
 use App\Mail\InviteUser;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Mail;
 use Spatie\Permission\Models\Role;
 use Validator;
@@ -53,7 +54,7 @@ class AdminInvitesController extends Controller
             $user->save();
 
 
-            $url = route('medicalRegister', [
+            $url = route('registerDoctor', [
                 'token' => $token
             ]);
 

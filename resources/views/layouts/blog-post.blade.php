@@ -84,10 +84,10 @@
                         </span>
                     </div>
                 </div>
-                {{-- @if($contentcategories)
+                {{-- @if($publicationcategories)
                 <div class="well">
                     <h4>Kategóriák</h4>
-                    @foreach($contentcategories as $contentcategory)
+                    @foreach($publicationcategories as $contentcategory)
                     <div class="row">
                         <div class="col-lg-6">
                             <ul class="list-unstyled">
@@ -123,7 +123,7 @@
     <script src="{{asset('js/libs.js')}}"></script>
 
     @yield('scripts')
-    
+
 </body>
 
 </html>

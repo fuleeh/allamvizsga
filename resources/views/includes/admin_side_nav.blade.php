@@ -23,22 +23,10 @@
                 <a href="#"><i class="fa fa-wrench fa-fw"></i> Posts<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
-                        <a href="{{route('admin.posts.index')}}">All Posts</a>
+                        <a href="{{route('admin.publications.index')}}">All Posts</a>
                     </li>
                 </ul>
             </li>
-
-
-{{--            <li>--}}
-{{--                <a href="#"><i class="fa fa-wrench fa-fw"></i>Patient Categories<span class="fa arrow"></span></a>--}}
-
-{{--                <ul class="nav nav-second-level">--}}
-{{--                    <li>--}}
-{{--                        <a href="{{route('admin.patientcategories.index')}}">All Categories</a>--}}
-{{--                    </li>--}}
-
-{{--                </ul>--}}
-{{--            </li>--}}
 
             <li>
                 <a href="#"><i class="fa fa-wrench fa-fw"></i>Invites<span class="fa arrow"></span></a>
@@ -50,22 +38,7 @@
                 </ul>
             </li>
 
-{{--            <li>--}}
-{{--                <a href="#"><i class="fa fa-wrench fa-fw"></i>Data Request<span class="fa arrow"></span></a>--}}
 
-{{--                <ul class="nav nav-second-level">--}}
-{{--                    <li>--}}
-{{--                        <a href="{{route('admin.request.fields')}}">Create Fields</a>--}}
-{{--                    </li>--}}
-{{--                    <li>--}}
-{{--                        <a href="{{route('admin.request.requests')}}">Create New Request</a>--}}
-{{--                    </li>--}}
-{{--                    <li>--}}
-{{--                        <a href="">All Requests</a>--}}
-{{--                    </li>--}}
-
-{{--                </ul>--}}
-{{--            </li>--}}
         </ul>
     </div>
 </div>

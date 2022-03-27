@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\PatientCategory;
-use App\Post;
+use App\Publication;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -18,15 +18,16 @@ class AdminController extends Controller
     public function dashboard()
     {
         $usersCount = User::count();
-        $postsCount = Post::count();
-        $categoriesCount = PatientCategory::count();
+        $pubsCount = Publication::all();
+        $patientCatCount = PatientCategory::count();
 
-        return view('admin.index', compact('usersCount', 'postsCount', 'categoriesCount'));
+        return view('admin.index', compact('usersCount', 'pubsCount', 'patientCatCount'));
     }
 
-    public function adminPostsList(){
-        $posts = Post::paginate(2);
-        return view('admin.posts.index', compact('posts'));
+    public function adminPubsList()
+    {
+        $publications = Publication::paginate(2);
+        return view('admin.publications.index', compact('publications'));
     }
 
 }

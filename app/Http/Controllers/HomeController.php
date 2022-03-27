@@ -1,12 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\User;
-use Illuminate\Http\Request;
-use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
+
 use App\Post;
 use App\ContentCategory;
+use App\Publication;
+use App\PublicationCategory;
 
 class HomeController extends Controller
 {
@@ -18,7 +17,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['auth', 'verified']);
+//        $this->middleware(['auth', 'verified']);
     }
 
     /**
@@ -28,8 +27,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
-        $contentcategories = ContentCategory::all();
-        return view('layouts.blog-home', compact('posts', 'contentcategories'));
+        $publications = Publication::all();
+        $pubCateogires = PublicationCategory::all();
+
+        return view('home', compact('publications', 'pubCateogires'));
     }
 }

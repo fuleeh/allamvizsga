@@ -16,8 +16,8 @@ class CreateRequestsTable extends Migration
         Schema::create('requests', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
-            $table->date('freq_start');
-            $table->date('freq_end');
+            $table->date('start_time');
+            $table->date('end_time');
             $table->integer('frequency');
             $table->text('fields');
             $table->integer('status')->default(0);

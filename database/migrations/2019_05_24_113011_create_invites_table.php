@@ -19,8 +19,6 @@ class CreateInvitesTable extends Migration
             $table->foreignId('role_id')->constrained();
             $table->string('token');
             $table->timestamps();
-
-            // $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
         });
     }
 
