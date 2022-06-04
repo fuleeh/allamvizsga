@@ -14,7 +14,6 @@ class CreateDoctorsTable extends Migration
     public function up()
     {
         Schema::create('doctors', function (Blueprint $table) {
-            $table->id();
             $table->foreignId('user_id')->constrained();
             $table->string('first_name', 50);
             $table->string('last_name', 50);

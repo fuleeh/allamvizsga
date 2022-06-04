@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePatientCategoriesTable extends Migration
+class CreateMeasuredGlucoseTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class CreatePatientCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('patient_categories', function (Blueprint $table) {
+        Schema::create('measured_glucose', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->foreignId('data_gathers_id')->constrained();
+            $table->string('before_meal');
+            $table->string('after_meal');
             $table->timestamps();
         });
     }
@@ -27,6 +29,6 @@ class CreatePatientCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('patient_categories');
+        Schema::dropIfExists('request_fields');
     }
 }

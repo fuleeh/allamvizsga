@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
-class CreateRequestFieldsTable extends Migration
+class CreateBolusServingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateRequestFieldsTable extends Migration
      */
     public function up()
     {
-        Schema::create('request_fields', function (Blueprint $table) {
+        Schema::create('bolus_servings', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('type');
+            $table->foreignId('data_gathers_id')->constrained();
+            $table->string('value');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateRequestFieldsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('request_fields');
+        Schema::dropIfExists('bolus_servings');
     }
 }

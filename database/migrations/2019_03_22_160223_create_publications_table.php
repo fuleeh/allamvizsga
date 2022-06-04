@@ -15,11 +15,13 @@ class CreatePublicationsTable extends Migration
     {
         Schema::create('publications', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
-            $table->integer('publication_category_id')->unsigned()->index();
-            $table->integer('photo_id')->index();
+//            $table->foreignId('user_id')->constrained();
+            $table->foreignId('author_id')->references('user_id')->on('doctors')->nullable();
+            $table->foreignId('publication_category_id')->constrained();
+            $table->foreignId('photo_id')->constrained();
             $table->string('title');
-            $table->string('body');
+            $table->text('body');
+            $table->boolean('status');
             $table->timestamps();
         });
     }

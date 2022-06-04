@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
-class CreatePatientCategoriesTable extends Migration
+class CreateCarbsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class CreatePatientCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('patient_categories', function (Blueprint $table) {
+        Schema::create('carbs', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->foreignId('data_gathers_id')->constrained();
+            $table->string('amount');
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ class CreatePatientCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('patient_categories');
+        Schema::dropIfExists('carbs');
     }
 }

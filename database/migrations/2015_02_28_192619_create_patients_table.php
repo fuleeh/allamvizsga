@@ -14,13 +14,14 @@ class CreatePatientsTable extends Migration
     public function up()
     {
         Schema::create('patients', function (Blueprint $table) {
-            $table->id();
             $table->foreignId('user_id')->constrained();
+            $table->foreignId('patient_category_id')->constrained()->nullable();
+            $table->foreignId('doctor_id')->references('id')->on('users')->nullable();
             $table->string('first_name', 50);
             $table->string('last_name', 50);
-            $table->foreignId('patient_category_id')->constrained();
             $table->string('address', 100);
             $table->integer('phone_number');
+            $table->boolean('isAccepted')->default(false);
             $table->timestamps();
         });
     }

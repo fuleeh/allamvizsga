@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRequestsTable extends Migration
+class CreateDataGathersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,17 @@ class CreateRequestsTable extends Migration
      */
     public function up()
     {
-        Schema::create('requests', function (Blueprint $table) {
+        Schema::create('data_gathers', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
+//            $table->foreignId('user_id')->constrained();
+            $table->foreignId('doctor_id')->references('user_id')->on('doctors');
             $table->date('start_time');
             $table->date('end_time');
-            $table->integer('frequency');
-            $table->text('fields');
-            $table->integer('status')->default(0);
+            $table->integer('glucose_carbs_freq');
+            $table->integer('bolus_serving_freq');
+            $table->boolean('activity')->default(true);
+            $table->boolean('status');
             $table->timestamps();
-
-            // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
