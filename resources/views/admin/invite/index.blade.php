@@ -1,8 +1,8 @@
-@extends('layouts.admin')
+@extends('layouts.home')
 
 @section('content')
 
-    <h2>Create new invitation</h2>
+    <h2>{{__('Create new invitation')}}</h2>
 
     <div class="col-sm-12">
         @if ($errors->any())
@@ -39,7 +39,7 @@
         </div>
 
         <div class="form-group">
-            {!! Form::submit('Send Invitaion', ['class'=>'btn btn-primary']) !!}
+            {!! Form::submit(__('Submit') , ['class'=>'btn btn-primary']) !!}
         </div>
 
         {!! Form::close() !!}
@@ -49,11 +49,5 @@
 @endsection
 
 @section('scripts')
-
-
-
-    <script>
-
-    </script>
 
 @stop

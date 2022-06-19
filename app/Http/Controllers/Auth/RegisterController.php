@@ -2,25 +2,25 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
 use App\Http\Controllers\Controller;
+use App\Providers\RouteServiceProvider;
+use App\User;
+use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Foundation\Auth\RegistersUsers;
-use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
 
-class RegisterController extends Controller{
+class RegisterController extends Controller
+{
     /*
-      |--------------------------------------------------------------------------
-      | Register Controller
-      |--------------------------------------------------------------------------
-      |
-      | This controller handles the registration of new users as well as their
-      | validation and creation. By default this controller uses a trait to
-      | provide this functionality without requiring any additional code.
-      |
-      */
+    |--------------------------------------------------------------------------
+    | Register Controller
+    |--------------------------------------------------------------------------
+    |
+    | This controller handles the registration of new users as well as their
+    | validation and creation. By default this controller uses a trait to
+    | provide this functionality without requiring any additional code.
+    |
+    */
 
     use RegistersUsers;
 
@@ -29,29 +29,32 @@ class RegisterController extends Controller{
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected $redirectTo = '/email/verify';
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct(){
+    public function __construct()
+    {
         $this->middleware('guest');
     }
 
     /**
-     * Get a validator for an incoming registration request.
+     * Get a validator for an incoming registration datagather.
      *
      * @param array $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data){
+    protected function validator(array $data)
+    {
         return Validator::make($data, [
-//            'first_name' => ['required', 'string', 'max:255'],
-//            'last_name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:6', 'confirmed'],
+            'first_name' => 'required|string|max:50',
+            'last_name' => 'required|string|max:50',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|alpha_num|min:6',
+            'confirm_password' => 'required|same:password',
         ]);
     }
 
@@ -59,12 +62,13 @@ class RegisterController extends Controller{
      * Create a new user instance after a valid registration.
      *
      * @param array $data
-     * @return \App\User
+     * @return \App\Models\User
      */
-    protected function create(array $data){
+    protected function create(array $data)
+    {
         $user = User::create([
-//            'first_name' => $data['first_name'],
-//            'last_name' => $data['last_name'],
+            'first_name' => $data['first_name'],
+            'last_name' => $data['last_name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
@@ -81,7 +85,8 @@ class RegisterController extends Controller{
         return $user;
     }
 
-    public function createPermissions(){
+    public function createPermissions()
+    {
         Role::create(['name' => 'admin']);
         Role::create(['name' => 'doctor']);
         Role::create(['name' => 'patient']);
@@ -99,7 +104,8 @@ class RegisterController extends Controller{
         $patinet->givePermissionTo('read');
     }
 
-    public function assignAdmin(){
+    public function assignAdmin()
+    {
         $user = User::find(1);
         $user->assignRole('admin');
     }

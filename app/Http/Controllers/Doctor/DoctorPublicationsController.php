@@ -1,11 +1,13 @@
 <?php
 
 namespace App\Http\Controllers\Doctor;
+use App\Doctor;
 use App\Http\Controllers\Controller;
 use App\Photo;
 use App\PublicationCategory;
 use App\Publication;
 use App\Http\Requests\PublicationCreateRequest;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Traits\HasRoles;
@@ -21,8 +23,10 @@ class DoctorPublicationsController extends Controller
      */
     public function index()
     {
+        $doctor = Doctor::where('user_id', Auth::id())->first();
         $publications = Publication::all();
-        return view('doctor.publications.index', compact('publications'));
+
+        return view('doctor.publications.index', compact('publications', 'doctor'));
     }
 
     /**
@@ -33,8 +37,9 @@ class DoctorPublicationsController extends Controller
     public function create()
     {
         $pubCategories = PublicationCategory::pluck('name', 'id')->all();
+        $doctor = Doctor::where('user_id', Auth::id())->first();
 
-        return view('doctor.publications.create', compact('pubCategories'));
+        return view('doctor.publications.create', compact('pubCategories', 'doctor'));
     }
 
     /**
@@ -46,14 +51,16 @@ class DoctorPublicationsController extends Controller
     public function store(PublicationCreateRequest $request)
     {
         $input = $request->all();
+
         if ($file = $request->file('photo_id')) {
             $name = time() . $file->getClientOriginalName();
             $file->move('images', $name);
             $photo = Photo::create(['file' => $name]);
             $input['photo_id'] = $photo->id;
         }
+//        $input['status'] = true;
 
-        $request->user()->posts()->create($input);
+        $request->user()->publications()->create($input);
 
         return redirect('/doctor/publications');
     }
@@ -77,10 +84,11 @@ class DoctorPublicationsController extends Controller
      */
     public function edit($id)
     {
-        $publications = Publication::findOrFail($id);
-        $pubCategories = PublicationCategory::pluck('name', 'id')->all();
+        $publication = Publication::findOrFail($id);
+        $pubCategory = PublicationCategory::pluck('name', 'id')->all();
+        $doctor = Doctor::where('user_id', Auth::id())->first();
 
-        return view('doctor.publications.edit', compact('publications', 'pubCategories'));
+        return view('doctor.publications.edit', compact('publication', 'pubCategory', 'doctor'));
     }
 
     /**
@@ -122,9 +130,20 @@ class DoctorPublicationsController extends Controller
         return redirect('/doctor/publications');
     }
 
+    public function updateStatus(Request $request)
+    {
+        $publication = Publication::find($request->publication_id);
+        $publication->status = $request->status;
+        $publication->save();
+        return response()->json(['success'=>'Status change successfully.']);
+    }
+
     public function publication($id)
     {
         $publication = Publication::find($id);
-        return view('publication', compact('publication'));
+        $doctor = Doctor::where('user_id', Auth::id())->first();
+        return view('publication', compact('publication', 'doctor'));
     }
+
+
 }

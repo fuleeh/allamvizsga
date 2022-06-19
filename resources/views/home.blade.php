@@ -1,75 +1,62 @@
-@extends('layouts.app')
+@extends('layouts.home')
 
-{{-- @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            {{-- <div class="card"> --}}
-{{-- <div class="card-header">Dashboard</div>
-@auth
-<div class="card-body">
-    @if (session('status'))
-        <div class="alert alert-success" role="alert">
-            {{ session('status') }}
+@section('content')
+    <h1 class="my-4">{{__('Publications')}}</h1>
+
+    @if($publications)
+        @foreach($publications as $publication)
+            <div class="card mb-4">
+                <img class="card-img-top" src="{{$publication->photo ? $publication->photo->file : null}}"
+                     alt="Card image cap">
+                <div class="card-body">
+                    <h2 class="card-title">{{$publication->title}}</h2>
+                    <p class="card-text">{{$publication->body}}</p>
+                    <a href="#" class="btn btn-primary">Read More &rarr;</a>
+                </div>
+                <div class="card-footer text-muted">
+                    Posted on {{$publication->created_at}}
+                    by {{$publication->user->first_name}} {{$publication->user->last_name}}
+                </div>
+            </div>
+        @endforeach
+
+        <!-- Pagination -->
+        <div class="d-flex justify-content-center">
+            {!! $publications->links() !!}
         </div>
     @endif
 
-    You are logged in!
-</div>
-@else
-Pleasel log in!
-@endauth --}}
-{{-- </div> --}}
-{{-- </div>
-</div>
-</div> --}}
-{{-- @endsection --}}
-@section('content')
-    <div class="container">
+@stop
 
-        <div class="row">
+@section('side-widget')
+    <div class="active-pink-3 active-pink-4 mb-4">
+        <input class="form-control" type="text" placeholder="{{__('Search')}}" aria-label="Search">
+    </div>
 
-            <!-- Blog Post Content Column -->
-            <div class="col-lg-8">
-
-                @foreach($publications as $pub)
-                    <h1>{{$pub->title}}</h1>
-
-                    <p class="lead">
-                        by {{$pub->user->first_name}}
-                    </p>
-
-                    <img class="img-responsive" src="{{$pub->photo ? $pub->photo->file : null}}" alt="">
-
-                    <p>{!!$pub->body!!}</p>
-
-                    <p><span class="glyphicon glyphicon-time"></span> Posted {{$pub->created_at->diffForHumans()}}</p>
-
-                    <hr>
-            @endforeach
-            <!-- Blog Sidebar Widgets Column -->
-{{--                <div class="col-md-4">--}}
-
-
-                    {{-- @if($publicationcategories)
-                    <div class="well">
-                        <h4>Kategóriák</h4>
-                        @foreach($publicationcategories as $contentcategory)
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <ul class="list-unstyled">
-                                    <li><a href="#">{{$contentcategory->name}}</a>
-                                    </li>
-                                </ul>
-                            </div>
+    <div class="card my-4">
+        <h5 class="card-header">{{__('Publication Categories')}}</h5>
+        <div class="card-body">
+            <div class="row">
+                @if($pubCategories)
+                    @foreach($pubCategories as $categ)
+                        <div class="col-lg-6">
+                            <ul class="list-unstyled mb-0">
+                                <li>
+                                    <a href="#">{{$categ->name}}</a>
+                                </li>
+                            </ul>
                         </div>
-                    </div>
-                        @endforeach
-                    @endif --}}
-
-
-{{--                </div>--}}
+                    @endforeach
+                @endif
             </div>
+        </div>
+    </div>
+
+    <div class="card my-4">
+        <h5 class="card-header">Side Widget</h5>
+        <div class="card-body">
+            You can put anything you want inside of these side widgets. They are easy to use, and feature the
+            new Bootstrap 4 card containers!
         </div>
     </div>
 @stop

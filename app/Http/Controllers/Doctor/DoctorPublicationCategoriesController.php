@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Doctor;
 
 use App\ContentCategory;
+use App\Doctor;
 use App\Http\Controllers\Controller;
 use App\PublicationCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DoctorPublicationCategoriesController extends Controller
 {
@@ -16,8 +18,9 @@ class DoctorPublicationCategoriesController extends Controller
      */
     public function index()
     {
+        $doctor = Doctor::where('user_id', Auth::id())->first();
         $pubCategories = PublicationCategory::all();
-        return view('doctor.publicationcategories.index', compact('pubCategories'));
+        return view('doctor.publicationcategories.index', compact('pubCategories', 'doctor'));
     }
 
     /**
@@ -62,8 +65,9 @@ class DoctorPublicationCategoriesController extends Controller
     public function edit($id)
     {
         $pubCategory = PublicationCategory::findOrFail($id);
+        $doctor = Doctor::where('user_id', Auth::id())->first();
 
-        return view('doctor.publicationcategories.edit', compact('pubCategory'));
+        return view('doctor.publicationcategories.edit', compact('pubCategory', 'doctor'));
     }
 
     /**

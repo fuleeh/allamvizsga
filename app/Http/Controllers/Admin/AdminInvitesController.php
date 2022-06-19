@@ -7,6 +7,7 @@ use App\Invites;
 use App\Mail\InviteUser;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Mail;
 use Spatie\Permission\Models\Role;
@@ -19,8 +20,7 @@ class AdminInvitesController extends Controller
 {
     public function index()
     {
-        $roles = Role::whereIn('id', [2, 3])->get();
-
+        $roles = Role::whereIn('id', [2])->get();
         return view('admin.invite.index', [
             'roles' => $roles
         ]);
@@ -41,6 +41,7 @@ class AdminInvitesController extends Controller
             $token = md5($tokenStr);
 
             $invite = new Invites();
+            $invite->user_id = Auth::id();
             $invite->email = $request->email;
             $invite->role_id = $request->role;
             $invite->token = $token;

@@ -50,7 +50,7 @@ class AdminUsersController extends Controller
             $input['password'] = bcrypt($request->password);
         }
 
-        /*if($file = $request->file('photo_id'))
+        /*if($file = $datagather->file('photo_id'))
         {
             $name = time() .$file->getClientOriginalName();
             $file->move('images', $name);
@@ -102,7 +102,7 @@ class AdminUsersController extends Controller
             $input['password'] = bcrypt($request->password);
         }
 
-        /*if($file = $request->file('photo_id'))
+        /*if($file = $datagather->file('photo_id'))
         {
             $name = time() . $file->getClientOriginalName();
             $file->move('images', $name);

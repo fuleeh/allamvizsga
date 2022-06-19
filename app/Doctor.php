@@ -9,5 +9,13 @@ class Doctor extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['first_name', 'last_name', 'address', 'phone_number'];
+    protected $primaryKey = "user_id";
+
+    protected $fillable = ['address', 'phone_number'];
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
+
 }

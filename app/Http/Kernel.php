@@ -9,7 +9,7 @@ class Kernel extends HttpKernel
     /**
      * The application's global HTTP middleware stack.
      *
-     * These middleware are run during every request to your application.
+     * These middleware are run during every datagather to your application.
      *
      * @var array
      */
@@ -35,6 +35,7 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            \App\Http\Middleware\Language::class,
         ],
 
         'api' => [

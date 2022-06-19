@@ -10,11 +10,11 @@ class Publication extends Model
     use HasFactory;
 
     protected $fillable = [
-        'content_category_id',
+        'publication_category_id',
         'photo_id',
         'title',
+        'status',
         'body',
-        'user_id'
     ];
 
     public function user()
@@ -22,9 +22,9 @@ class Publication extends Model
         return $this->belongsTo('App\User');
     }
 
-    public function contentCategory()
+    public function publicationCategory()
     {
-        return $this->belongsTo('App\ContentCategory');
+        return $this->belongsTo('App\PublicationCategory');
     }
 
     public function photo()

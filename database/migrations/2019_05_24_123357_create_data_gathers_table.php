@@ -15,8 +15,7 @@ class CreateDataGathersTable extends Migration
     {
         Schema::create('data_gathers', function (Blueprint $table) {
             $table->id();
-//            $table->foreignId('user_id')->constrained();
-            $table->foreignId('doctor_id')->references('user_id')->on('doctors');
+            $table->foreignId('user_id')->constrained();
             $table->date('start_time');
             $table->date('end_time');
             $table->integer('glucose_carbs_freq');

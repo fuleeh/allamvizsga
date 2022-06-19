@@ -1,120 +1,139 @@
-@extends('layouts.app')
+@extends('layouts.home')
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+@section('register')
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">{{ __('Register') }}</div>
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
-                        @csrf
+                    <div class="card-body">
+                        <form method="POST" action="{{ route('register') }}">
+                            @csrf
 
 
+                            <div class="form-group row">
+                                <label for="first_name"
+                                       class="col-md-4 col-form-label text-md-right">{{ __('First Name') }}</label>
 
-{{--                        <div class="form-group row">--}}
-{{--                            <label for="first_name" class="col-md-4 col-form-label text-md-right">{{ __('First Name') }}</label>--}}
+                                <div class="col-md-6">
+                                    <input id="first_name" type="text"
+                                           class="form-control{{ $errors->has('first_name') ? ' is-invalid' : '' }}"
+                                           name="first_name" value="{{ old('first_name') }}" required autofocus>
 
-{{--                            <div class="col-md-6">--}}
-{{--                                <input id="first_name" type="text" class="form-control{{ $errors->has('first_name') ? ' is-invalid' : '' }}" name="first_name" value="{{ old('first_name') }}" required autofocus>--}}
+                                    @if ($errors->has('first_name'))
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('first_name') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
 
-{{--                                @if ($errors->has('first_name'))--}}
-{{--                                    <span class="invalid-feedback" role="alert">--}}
-{{--                                        <strong>{{ $errors->first('first_name') }}</strong>--}}
-{{--                                    </span>--}}
-{{--                                @endif--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
+                            <div class="form-group row">
+                                <label for="last_name"
+                                       class="col-md-4 col-form-label text-md-right">{{ __('Last Name') }}</label>
 
-{{--                        <div class="form-group row">--}}
-{{--                                <label for="last_name" class="col-md-4 col-form-label text-md-right">{{ __('Last Name') }}</label>--}}
-{{--    --}}
-{{--                                <div class="col-md-6">--}}
-{{--                                    <input id="last_name" type="text" class="form-control{{ $errors->has('last_name') ? ' is-invalid' : '' }}" name="last_name" value="{{ old('last_name') }}" required autofocus>--}}
-{{--    --}}
-{{--                                    @if ($errors->has('last_name'))--}}
-{{--                                        <span class="invalid-feedback" role="alert">--}}
-{{--                                            <strong>{{ $errors->first('last_name') }}</strong>--}}
-{{--                                        </span>--}}
-{{--                                    @endif--}}
-{{--                                </div>--}}
-{{--                        </div>--}}
+                                <div class="col-md-6">
+                                    <input id="last_name" type="text"
+                                           class="form-control{{ $errors->has('last_name') ? ' is-invalid' : '' }}"
+                                           name="last_name" value="{{ old('last_name') }}" required autofocus>
 
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                                    @if ($errors->has('last_name'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('last_name') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
+                            <div class="form-group row">
+                                <label for="email"
+                                       class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
-                                @if ($errors->has('email'))
-                                    <span class="invalid-feedback" role="alert">
+                                <div class="col-md-6">
+                                    <input id="email" type="email"
+                                           class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"
+                                           name="email" value="{{ old('email') }}" required>
+
+                                    @if ($errors->has('email'))
+                                        <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('email') }}</strong>
                                     </span>
-                                @endif
+                                    @endif
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                            <div class="form-group row">
+                                <label for="password"
+                                       class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
+                                <div class="col-md-6">
+                                    <input id="password" type="password"
+                                           class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}"
+                                           name="password" required>
 
-                                @if ($errors->has('password'))
-                                    <span class="invalid-feedback" role="alert">
+                                    @if ($errors->has('password'))
+                                        <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('password') }}</strong>
                                     </span>
-                                @endif
+                                    @endif
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+                            <div class="form-group row">
+                                <label for="password-confirm"
+                                       class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
 
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                                <div class="col-md-6">
+                                    <input id="password-confirm" type="password" class="form-control"
+                                           name="password_confirmation" required>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="form-check">
-                            <input id="aszfCheckBox" class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                            <label class="form-check-label" for="defaultCheck1">
-                              Elfogadom az <a href="asdsads">altalanos szerzodesi felteteleket</a>!
-
-                            </label>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary submitBtn" disabled>
-                                    {{ __('Register') }}
-                                </button>
+                            <div class="form-group row">
+                                <label for="aszfCheckBox"
+                                       class="col-md-4 col-form-label text-md-right"><a href="#">{{__('Privacy Policy') }}</a></label>
+                                <div class="col-md-6">
+                                    <input id="aszfCheckBox" class="form-check-input" type="checkbox" value="">
+                                </div>
                             </div>
-                        </div>
-                    </form>
+
+{{--                            <div class="form-check row">--}}
+{{--                                <input id="aszfCheckBox" class="form-check-input col-md-4 text-md-right" type="checkbox" value="">--}}
+{{--                                <div class="col-md-6">--}}
+{{--                                    <label class="form-check-label" for="aszfCheckBox">--}}
+{{--                                        <a href="/privacy-policy">{{__('Privacy Policy')}}</a>!--}}
+{{--                                    </label>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+
+                            <div class="form-group row mb-0">
+                                <div class="col-md-6 offset-md-4">
+                                    <button type="submit" class="btn btn-primary submitBtn" disabled>
+                                        {{ __('Register') }}
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 @endsection
 
 @push('script')
-<script>
-    $(document).ready(function(){
-        $("#aszfCheckBox").change(function(){
-            if($(this).is(":checked"))
-            {
-                //console.log("checked");
-                $(".submitBtn").prop("disabled", false);
-            }
-            else
-            {
-                $(".submitBtn").prop("disabled", true);
-                //console.log("unchecked");
-            }
+    <script>
+        $(document).ready(function () {
+            $("#aszfCheckBox").change(function () {
+                if ($(this).is(":checked")) {
+                    //console.log("checked");
+                    $(".submitBtn").prop("disabled", false);
+                } else {
+                    $(".submitBtn").prop("disabled", true);
+                    //console.log("unchecked");
+                }
+            });
         });
-    });
-</script>
+    </script>
 @endpush

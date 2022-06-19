@@ -44,14 +44,14 @@
                 <a href="#"><i class="fa fa-wrench fa-fw"></i>Data Request<span class="fa arrow"></span></a>
 
                 <ul class="nav nav-second-level">
+{{--                    <li>--}}
+{{--                        <a href="{{route('doctor.datagather.fields')}}">Create Fields</a>--}}
+{{--                    </li>--}}
                     <li>
-                        <a href="{{route('doctor.request.fields')}}">Create Fields</a>
+                        <a href="{{route('doctor.datagather.create')}}">Create New Request</a>
                     </li>
                     <li>
-                        <a href="{{route('doctor.request.create')}}">Create New Request</a>
-                    </li>
-                    <li>
-                        <a href="{{route('doctor.request.index')}}">All Requests</a>
+                        <a href="{{route('doctor.datagather.index')}}">All Requests</a>
                     </li>
 
                 </ul>

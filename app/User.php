@@ -11,14 +11,14 @@ class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable, HasRoles;
 
-    // protected $guard_name = 'web';
+//     protected $guard_name = 'web';
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'email', 'password',
+        'first_name', 'last_name','email', 'password',
     ];
 
     /**
@@ -42,6 +42,16 @@ class User extends Authenticatable implements MustVerifyEmail
     public function publications()
     {
         return $this->hasMany('App\Publication');
+    }
+
+    public function patients()
+    {
+        return $this->hasMany('App\Patient');
+    }
+
+    public function doctors()
+    {
+        return $this->hasMany('App\Doctor');
     }
 
 }

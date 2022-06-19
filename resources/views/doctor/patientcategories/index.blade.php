@@ -2,61 +2,58 @@
 
 @section('content')
 
-
-@if(Session::has('deleted_category'))
+    @if(Session::has('deleted_category'))
         <p class="bg-danger">{{session('deleted_category')}}</p>
-@endif
+    @endif
 
+    <h1>{{__('Patient Categories')}}</h1>
 
+    <div class="col">
 
-    <h1>Patient Categories</h1>
+        {!! Form::open(['method'=>'POST', 'action'=>'Doctor\DoctorPatientCategoryController@store']) !!}
 
-    <div class="col-sm-6">
+        <div class="form-group">
+            {!! Form::label('name', __('Name')) !!}
+            {!! Form::text('name', null, ['class'=>'form-control']) !!}
+        </div>
 
-            {!! Form::open(['method'=>'POST', 'action'=>'Doctor\DoctorPatientCategoryController@store']) !!}
+        <div class="form-group">
+            {!! Form::submit(__('Create'), ['class'=>'btn btn-primary col']) !!}
+        </div>
 
-            <div class="form-group">
-                {!! Form::label('name', 'Name:') !!}
-                {!! Form::text('name', null, ['class'=>'form-control']) !!}
-            </div>
-
-            <div class="form-group">
-                    {!! Form::submit('Create Category', ['class'=>'btn btn-primary']) !!}
-            </div>
-
-            {!! Form::close() !!}
+        {!! Form::close() !!}
 
     </div>
 
-    <div class="col-sm-6">
+    <div class="col">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>{{__('Id')}}</th>
+                <th>{{__('Name')}}</th>
+                <th>{{__('Created At')}}</th>
+            </tr>
+            </thead>
+            <tbody>
 
-            <table class="table">
-
-                <thead>
-                  <tr>
-                    <th>Id</th>
-                    <th>Name</th>
-                    <th>Created at</th>
-                  </tr>
-                </thead>
-                <tbody>
-
-              @if($patientcategories)
+            @if($patientcategories)
 
                 @foreach($patientcategories as $patientcategory)
 
-                  <tr>
-                    <td>{{$patientcategory->id}}</td>
-                    <td><a href="{{route('doctor.patientcategories.edit', $patientcategory->id)}}">{{$patientcategory->name}}</td></a>
-                    <td>{{$patientcategory->created_at ? $patientcategory->created_at->diffForHumans() : 'No date'}}</td>
-                  </tr>
+                    <tr>
+                        <td>{{$patientcategory->id}}</td>
+                        <td>
+                            <a href="{{route('doctor.patientcategories.edit', $patientcategory->id)}}">{{$patientcategory->name}}
+                        </td>
+
+                        <td>{{$patientcategory->created_at ? $patientcategory->created_at->diffForHumans() : 'No date'}}</td>
+                    </tr>
 
                 @endforeach
 
-              @endif
+            @endif
 
-                  </tbody>
-
-        </div>
-
+            </tbody>
+        </table>
+    </div>
 @stop

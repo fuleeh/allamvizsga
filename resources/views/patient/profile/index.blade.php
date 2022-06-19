@@ -1,54 +1,67 @@
-@extends('layouts.app')
+@extends('layouts.home')
 
 @section('content')
 
-    <h1>User's data</h1>
-
-    <div class="col-md-3">
+    <h1>{{__('Profile')}}</h1>
+    <div class="col">
 
         {!! Form::open(['method'=>'POST', 'action'=>'UserController@userProfileDatas']) !!}
 
         <div class="form-group">
-            {!! Form::label('first_name', 'First Name:') !!}
-            {!! Form::text('first_name', null, ['class'=>'form-control']) !!}
+            {!! Form::label('first_name', __('First Name')) !!}
+            {!! Form::text('first_name', $user->first_name, ['class'=>'form-control']) !!}
         </div>
 
         <div class="form-group">
-            {!! Form::label('last_name', 'Last Name:') !!}
-            {!! Form::text('last_name', null, ['class'=>'form-control']) !!}
+            {!! Form::label('last_name', __('Last Name')) !!}
+            {!! Form::text('last_name', $user->last_name, ['class'=>'form-control']) !!}
         </div>
 
         <div class="form-group">
-            {!! Form::label('address', 'Address:') !!}
-            {!! Form::text('address', null, ['class'=>'form-control']) !!}
+            {!! Form::label('address', __('Address')) !!}
+            {!! Form::text('address', $patient->address ?: null, ['class'=>'form-control']) !!}
         </div>
 
         <div class="form-group">
-            {!! Form::label('phone_number', 'Phone Number:') !!}
-            {!! Form::text('phone_number', null, ['class'=>'form-control']) !!}
+            {!! Form::label('phone_number', __('Phone Number')) !!}
+            {!! Form::text('phone_number', $patient->phone_number ?: null, ['class'=>'form-control']) !!}
         </div>
 
         <div class="form-group">
-            {!! Form::label('email', 'Email:') !!}
+            {!! Form::label('email', __('E-Mail Address')) !!}
             {!! Form::text('email', $user->email, ['class'=>'form-control']) !!}
         </div>
 
-        @if($patientcategories)
-            {!! Form::label('category', 'Category:') !!}
-            <select class="form-control" name="role">
-                @foreach($patientcategories as $patientcategory)
-                    <option value="{{$patientcategory->id}}">{{$patientcategory->name}}</option>
-                @endforeach
-            </select>
+
+        @if($doctors)
+            <div class="form-group">
+                {!! Form::label('doctor_id', __('Doctor')) !!}
+                <select class="form-control" name="doctor_id">
+                    @foreach($doctors as $doctor)
+                        <option value="{{$doctor->user_id}}">{{$doctor->first_name}} {{$doctor->last_name}}</option>
+                    @endforeach
+                </select>
+            </div>
         @endif
 
-        <div class="form-group">
-            {!! Form::label('password', 'Password:') !!}
-            {!! Form::password('password', ['class'=>'form-control']) !!}
-        </div>
+        @if($patientcategories)
+            <div class="form-group">
+                {!! Form::label('patient_category_id', __('Category')) !!}
+                <select class="form-control" name="patient_category_id">
+                    @foreach($patientcategories as $patientcategory)
+                        <option value="{{$patientcategory->id}}">{{$patientcategory->name}}</option>
+                    @endforeach
+                </select>
+            </div>
+        @endif
+
+        {{--        <div class="form-group">--}}
+        {{--            {!! Form::label('password', 'Password:') !!}--}}
+        {{--            {!! Form::password('password', ['class'=>'form-control']) !!}--}}
+        {{--        </div>--}}
 
         <div class="form-group">
-            {!! Form::submit('Submit', ['class'=>'btn btn-primary']) !!}
+            {!! Form::submit(__('Submit'), ['class'=>'btn btn-primary']) !!}
         </div>
 
         {!! Form::close() !!}

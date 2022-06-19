@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Doctor;
 
+use App\Doctor;
 use App\Http\Controllers\Controller;
 use App\PatientCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use function redirect;
 use function view;
@@ -18,8 +20,9 @@ class DoctorPatientCategoryController extends Controller
      */
     public function index()
     {
+        $doctor = Doctor::where('user_id', Auth::id())->first();
         $patientcategories = PatientCategory::all();
-        return view('doctor.patientcategories.index', ['patientcategories' => $patientcategories]);
+        return view('doctor.patientcategories.index', compact('patientcategories', 'doctor'));
     }
 
     /**
@@ -64,8 +67,9 @@ class DoctorPatientCategoryController extends Controller
     public function edit($id)
     {
         $patientcategory = PatientCategory::findOrFail($id);
+        $doctor = Doctor::where('user_id', Auth::id())->first();
 
-        return view('doctor.patientcategories.edit', compact('patientcategory'));
+        return view('doctor.patientcategories.edit', compact('patientcategory', 'doctor'));
     }
 
     /**

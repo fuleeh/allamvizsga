@@ -16,12 +16,12 @@ class AdminRequestsController extends Controller
     public function createFields(Request $request)
     {
         RequestField::create($request->all());
-        return redirect('admin/request/fields');
+        return redirect('admin/datagather/fields');
     }
 
     public function getFields()
     {
-        return view('admin/request/fields');
+        return view('admin/datagather/fields');
     }
 
     public function index()
@@ -30,12 +30,12 @@ class AdminRequestsController extends Controller
         // $users = User::all();
         $fields = RequestField::all();
 
-        // return view('admin/request/requests',
+        // return view('admin/datagather/requests',
         // [
         //     'users' => $users,
         //     'fields' => $fields
         // ]);
-        return view('admin.request.requests', compact('users', 'fields'));
+        return view('admin.datagather.requests', compact('users', 'fields'));
     }
 
     public function createRequest(Request $request)

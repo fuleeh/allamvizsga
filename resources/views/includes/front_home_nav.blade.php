@@ -1,44 +1,72 @@
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <ul class="nav navbar-nav">
-                <li><a href="/">Home</a></li>
-            </ul>
-        </div>
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav navbar-right">
+<ul class="navbar-nav mr-auto">
+    <li class="nav-item active">
+        <a class="nav-link" href="/">{{__('Home')}}</a>
+    </li>
+    {{--    <li class="nav-item">--}}
+    {{--        <a class="nav-link" href="#">About</a>--}}
+    {{--    </li>--}}
+    <li class="nav-item">
+        <a class="nav-link" href="#">{{__('Contact')}}</a>
+    </li>
+    @role('admin')
+    <li class="nav-item">
+        <a class="nav-link" href="{{route('admin.invite.index')}}">{{__('Invite Doctor')}}</a>
+    </li>
+    @endrole
+    @role('doctor')
+    <li class="nav-item">
+        <a class="nav-link" href="/doctor">{{__('Doctor Dashboard')}}</a>
+    </li>
+    @endrole
+    @role('patient')
+    @isset($activeDataGather)
+        <li class="nav-item">
+            <a class="nav-link" href="{{route('patient.datagather.create')}}">Fill In Data</a>
+        </li>
+    @endisset
+    @endrole
+</ul>
 
-                @if(Auth::guest())
+<ul class="navbar-nav ml-auto">
+    @guest
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+        </li>
+        @if (Route::has('register'))
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+            </li>
+        @endif
+    @else
+        <li class="nav-item dropdown">
+            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                <span class="caret">{{__('Menu')}}</span>
+            </a>
 
-                    <li>
-                        <a href="/login">Login</a>
-                    </li>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                @role('patient')
+                <a class="dropdown-item" href="{{ route('editProfile') }}">{{__('Profile')}}</a>
+                @endrole
+                <a class="dropdown-item" href="{{ route('logout') }}"
+                   onclick="event.preventDefault();
+                                                                                 document.getElementById('logout-form').submit();">
+                    {{ __('Logout') }}
+                </a>
 
-                    <li>
-                        <a href="/register">Register</a>
-                    </li>
-
-                @else
-
-                    <li>
-                        <a href="/logout">Logout</a>
-                    </li>
-
-
-                @endif
-            </ul>
-        </div>
-
+                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                      style="display: none;">
+                    @csrf
+                </form>
+            </div>
+        </li>
+    @endguest
+    <div>
+        <select class="form-select" name="language" style="width: 100%;">
+            <option value="en" {{ \Session::get('language') == 'en' ? 'selected' : '' }}>{{__('English')}}</option>
+            <option value="hu" {{ \Session::get('language') == 'hu' ? 'selected' : '' }}>{{__('Hungarian')}}</option>
+        </select>
     </div>
+</ul>
 
-</nav>
 
-<div class="container">

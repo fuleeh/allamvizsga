@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class BolusServing extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['data_gathers_id', 'value'];
 }

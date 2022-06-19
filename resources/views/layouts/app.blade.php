@@ -35,11 +35,6 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav mr-auto">
-                    {{-- @auth
-                        <li class="nav-item">
-                            <a class="nav-link" href="">{{ __('app.users') }}</a>
-                        </li>
-                    @endauth --}}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('publications') }}">Publications</a>
                     </li>
@@ -49,6 +44,19 @@
                     <li class="nav-item">
                         <a class="nav-link" href="">About us</a>
                     </li>
+                    @role('admin')
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('admin.invite.index')}}">Invite Doctor via E-mail</a>
+                    </li>
+                    @endrole
+                    @role('patient')
+                        @isset($activeDataGather)
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{route('patient.datagather.create')}}">Fill In Data</a>
+                            </li>
+                        @endisset
+                    @endrole
+
                 </ul>
 
                 <!-- Right Side Of Navbar -->
@@ -71,7 +79,7 @@
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                 @role('patient')
-                                    <a class="dropdown-item" href="{{ route('profile') }}">Profile</a>
+                                <a class="dropdown-item" href="{{ route('editProfile') }}">Profile</a>
                                 @endrole
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();

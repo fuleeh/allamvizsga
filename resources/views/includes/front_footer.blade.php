@@ -1,7 +1,4 @@
-<footer>
-    <div class="row">
-        <div class="col-lg-12">
-            <p>Copyright &copy; allamvizsga.test {{\Carbon\Carbon::now()->year}}</p>
-        </div>
-    </div>
-</footer>
+<div class="container">
+    <p class="m-0 text-center text-white">Copyright &copy; allamvizsga.test {{\Carbon\Carbon::now()->year}}</p>
+</div>
+
